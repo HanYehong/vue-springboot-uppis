@@ -1,7 +1,7 @@
 package com.gly.uppis.performance.service.bo;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/27 3:42
  */
 public class UserWithPeriod {

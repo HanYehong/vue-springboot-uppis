@@ -1,7 +1,7 @@
 package com.gly.uppis.task.controller.request;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/25 15:28
  */
 public class TaskPercentageRequest {

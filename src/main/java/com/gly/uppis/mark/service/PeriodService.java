@@ -3,7 +3,7 @@ package com.gly.uppis.mark.service;
 import com.gly.uppis.common.entity.Period;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/23 1:46
  */
 public interface PeriodService {

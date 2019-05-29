@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/22 20:16
  */
 @CrossOrigin

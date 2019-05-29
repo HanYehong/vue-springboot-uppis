@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/3/30 16:39
  */
 public class SerializeUtil {

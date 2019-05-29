@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/23 22:31
  */
 public class AttendanceSearchRequest {

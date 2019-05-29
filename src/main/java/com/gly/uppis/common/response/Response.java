@@ -3,7 +3,7 @@ package com.gly.uppis.common.response;
 import java.util.LinkedList;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/21 16:34
  */
 public class Response {

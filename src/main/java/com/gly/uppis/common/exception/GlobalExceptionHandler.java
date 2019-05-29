@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author yehong.han
+ * @author GuLiyun
  * @date 2019/4/24
  */
 @ControllerAdvice

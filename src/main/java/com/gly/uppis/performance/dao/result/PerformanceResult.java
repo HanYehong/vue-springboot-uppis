@@ -3,7 +3,7 @@ package com.gly.uppis.performance.dao.result;
 import com.gly.uppis.common.entity.Performance;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/26 1:11
  */
 public class PerformanceResult extends Performance {

@@ -8,7 +8,7 @@ import com.gly.uppis.mark.service.bo.MarkPersonBO;
 import java.util.List;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/22 16:57
  */
 public interface MarkService {

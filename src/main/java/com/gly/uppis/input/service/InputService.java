@@ -4,7 +4,7 @@ import com.gly.uppis.common.entity.Dept;
 import com.gly.uppis.common.entity.User;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/22 0:21
  */
 public interface InputService {

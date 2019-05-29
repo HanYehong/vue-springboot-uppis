@@ -1,7 +1,7 @@
 package com.gly.uppis.common.exception;
 
 /**
- * @author yehong.han
+ * @author GuLiyun
  * @date 2019/3/26
  */
 public class ValidException extends RuntimeException {

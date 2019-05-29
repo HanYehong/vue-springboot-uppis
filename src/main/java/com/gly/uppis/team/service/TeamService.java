@@ -6,7 +6,7 @@ import com.gly.uppis.team.dao.result.TeamResult;
 import java.util.List;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/21 16:27
  */
 public interface TeamService {

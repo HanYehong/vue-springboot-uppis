@@ -6,7 +6,7 @@ import com.gly.uppis.common.entity.Attendance;
 import java.util.List;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/23 22:17
  */
 public interface AttendanceDao {

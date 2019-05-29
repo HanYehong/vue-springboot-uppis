@@ -9,7 +9,7 @@ import com.gly.uppis.task.dao.result.TaskResult;
 import java.util.List;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/23 2:40
  */
 public interface TaskService {

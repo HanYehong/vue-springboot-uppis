@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/22 23:29
  */
 public interface DeptDao {

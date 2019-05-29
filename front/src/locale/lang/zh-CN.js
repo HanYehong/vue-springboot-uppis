@@ -8,6 +8,7 @@ export default {
   task_detail_page: '任务详情',
   mark_page: '评分系统',
   mark_detail_page: '评分界面',
+  performance: '绩效查看',
   performance_page: '我的绩效',
   dept_performance_page: '部门绩效',
   team_page: '我的团队',

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/26 0:42
  */
 @Service
@@ -35,7 +35,7 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Autowired
     private UserDao userDao;
 
-    private static Integer USER_ID = 10012001;
+    private static Integer USER_ID = 10001;
 
     @Override
     public PerformanceResult getLastRecord(Integer userId) {

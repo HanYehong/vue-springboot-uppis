@@ -3,7 +3,7 @@ package com.gly.uppis.performance.service.bo;
 import java.util.List;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/26 3:34
  */
 public class PerResultBO {

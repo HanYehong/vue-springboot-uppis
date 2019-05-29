@@ -3,7 +3,7 @@ package com.gly.uppis.team.controller.request;
 import java.util.List;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/21 15:29
  */
 public class SearchTeamRequest {

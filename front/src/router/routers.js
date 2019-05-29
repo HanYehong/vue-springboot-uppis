@@ -56,7 +56,8 @@ export default [
     component: Main,
     meta: {
       hideInBread: true,
-      hideInMenu: false
+      hideInMenu: false,
+      access: ['10001','10016','10014'],
     },
     children: [
       {
@@ -76,7 +77,8 @@ export default [
     component: Main,
     meta: {
       hideInBread: true,
-      hideInMenu: false
+      hideInMenu: false,
+      access: ['10001','10016','10014']
     },
     children: [
       {
@@ -95,7 +97,8 @@ export default [
     name: 'attendance',
     component: Main,
     meta: {
-      hideInBread: true
+      hideInBread: true,
+      access: ['10001','10016','10014']
     },
     children: [
       {
@@ -115,7 +118,8 @@ export default [
     name: 'task',
     component: Main,
     meta: {
-      hideInBread: true
+      hideInBread: true,
+      access: ['10001','10016','10014']
     },
     children: [
       {
@@ -144,7 +148,8 @@ export default [
     name: 'mark',
     component: Main,
     meta: {
-      hideInBread: true
+      hideInBread: true,
+      access: ['10001','10016','10014'],
     },
     children: [
       {
@@ -173,7 +178,11 @@ export default [
     name: 'performance',
     component: Main,
     meta: {
-      hideInBread: true
+      icon: 'md-search',
+      title: '绩效查看',
+      hideInMenu: false,
+      hideInBread: true,
+      access: ['10001','10016','10014']
     },
     children: [
       {
@@ -190,7 +199,8 @@ export default [
         name: 'dept_performance_page',
         meta: {
           icon: 'ios-podium',
-          title: '部门绩效'
+          title: '部门绩效',
+          access: ['10001','10016']
         },
         component: () => import('@/view/performance/deptPerformance.vue')
       }
@@ -201,7 +211,8 @@ export default [
     name: 'team',
     component: Main,
     meta: {
-      hideInBread: true
+      hideInBread: true,
+      access: ['10001','10016','10014']
     },
     children: [
       {
@@ -221,7 +232,8 @@ export default [
     meta: {
       icon: 'ios-create',
       title: '信息录入',
-      hideInMenu: false
+      hideInMenu: false,
+      access: ['admin']
     },
     component: Main,
     children: [
@@ -250,7 +262,8 @@ export default [
     name: 'setting',
     component: Main,
     meta: {
-      hideInBread: true
+      hideInBread: true,
+      access: ['admin']
     },
     children: [
       {
@@ -300,7 +313,7 @@ export default [
     meta: {
       icon: 'logo-buffer',
       title: '组件',
-      /*hideInMenu: true*/
+      hideInMenu: true
     },
     component: Main,
     children: [

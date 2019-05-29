@@ -3,7 +3,7 @@ package com.gly.uppis.mark.dao.result;
 import com.gly.uppis.common.entity.User;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/22 18:28
  */
 public class UserWithLeaderResult extends User {

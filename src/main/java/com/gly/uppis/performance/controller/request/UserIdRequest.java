@@ -1,7 +1,7 @@
 package com.gly.uppis.performance.controller.request;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/27 4:04
  */
 public class UserIdRequest {

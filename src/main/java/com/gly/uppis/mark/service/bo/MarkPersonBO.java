@@ -5,7 +5,7 @@ import com.gly.uppis.common.entity.User;
 import java.util.List;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/23 0:14
  */
 public class MarkPersonBO {

@@ -4,7 +4,7 @@ import com.gly.uppis.common.cache.RedisHelper;
 import com.gly.uppis.common.exception.ValidException;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/22 15:22
  */
 public class UserUtil {

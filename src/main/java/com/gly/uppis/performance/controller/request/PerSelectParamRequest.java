@@ -1,7 +1,7 @@
 package com.gly.uppis.performance.controller.request;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/26 3:52
  */
 public class PerSelectParamRequest {

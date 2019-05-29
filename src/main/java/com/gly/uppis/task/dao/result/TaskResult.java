@@ -3,7 +3,7 @@ package com.gly.uppis.task.dao.result;
 import com.gly.uppis.common.entity.Task;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/24 9:45
  */
 public class TaskResult extends Task {

@@ -1,7 +1,7 @@
 package com.gly.uppis.mark.controller.request;
 
 /**
- * @author HanYehong
+ * @author GuLiyun
  * @date 2019/5/23 0:41
  */
 public class MarkReuqest {
