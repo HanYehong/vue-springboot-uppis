@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.common.dao.MarkMapper">
+  <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.Mark">
+    <id column="mark_id" jdbcType="BIGINT" property="markId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="period_id" jdbcType="INTEGER" property="periodId" />
+    <result column="self_assessment" jdbcType="DOUBLE" property="selfAssessment" />
+    <result column="peer_assessment" jdbcType="DOUBLE" property="peerAssessment" />
+    <result column="superior_assessment" jdbcType="DOUBLE" property="superiorAssessment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mark_id, user_id, period_id, self_assessment, peer_assessment, superior_assessment
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mark
+    where mark_id = #{markId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mark
+    where mark_id = #{markId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gly.uppis.common.entity.Mark">
+    insert into mark (mark_id, user_id, period_id, 
+      self_assessment, peer_assessment, superior_assessment
+      )
+    values (#{markId,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{periodId,jdbcType=INTEGER}, 
+      #{selfAssessment,jdbcType=DOUBLE}, #{peerAssessment,jdbcType=DOUBLE}, #{superiorAssessment,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gly.uppis.common.entity.Mark">
+    insert into mark
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="markId != null">
+        mark_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="periodId != null">
+        period_id,
+      </if>
+      <if test="selfAssessment != null">
+        self_assessment,
+      </if>
+      <if test="peerAssessment != null">
+        peer_assessment,
+      </if>
+      <if test="superiorAssessment != null">
+        superior_assessment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="markId != null">
+        #{markId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="periodId != null">
+        #{periodId,jdbcType=INTEGER},
+      </if>
+      <if test="selfAssessment != null">
+        #{selfAssessment,jdbcType=DOUBLE},
+      </if>
+      <if test="peerAssessment != null">
+        #{peerAssessment,jdbcType=DOUBLE},
+      </if>
+      <if test="superiorAssessment != null">
+        #{superiorAssessment,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gly.uppis.common.entity.Mark">
+    update mark
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="periodId != null">
+        period_id = #{periodId,jdbcType=INTEGER},
+      </if>
+      <if test="selfAssessment != null">
+        self_assessment = #{selfAssessment,jdbcType=DOUBLE},
+      </if>
+      <if test="peerAssessment != null">
+        peer_assessment = #{peerAssessment,jdbcType=DOUBLE},
+      </if>
+      <if test="superiorAssessment != null">
+        superior_assessment = #{superiorAssessment,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where mark_id = #{markId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gly.uppis.common.entity.Mark">
+    update mark
+    set user_id = #{userId,jdbcType=INTEGER},
+      period_id = #{periodId,jdbcType=INTEGER},
+      self_assessment = #{selfAssessment,jdbcType=DOUBLE},
+      peer_assessment = #{peerAssessment,jdbcType=DOUBLE},
+      superior_assessment = #{superiorAssessment,jdbcType=DOUBLE}
+    where mark_id = #{markId,jdbcType=BIGINT}
+  </update>
+</mapper>

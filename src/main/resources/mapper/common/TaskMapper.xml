@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.common.dao.TaskMapper">
+    <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.Task">
+        <id column="task_id" jdbcType="INTEGER" property="taskId" />
+        <result column="task_title" jdbcType="VARCHAR" property="taskTitle" />
+        <result column="statement" jdbcType="VARCHAR" property="statement" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="high_task_id" jdbcType="VARCHAR" property="highTaskId" />
+        <result column="parent_task_id" jdbcType="INTEGER" property="parentTaskId" />
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+        <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="score" jdbcType="DOUBLE" property="score" />
+        <result column="percentage" jdbcType="DOUBLE" property="percentage" />
+        <result column="weight" jdbcType="DOUBLE" property="weight" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="accessory" jdbcType="VARCHAR" property="accessory" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="creator" jdbcType="INTEGER" property="creator" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        task_id, task_title, statement, user_id, high_task_id, parent_task_id, begin_time,
+        finish_time, deadline, update_time, status, score, percentage, weight, content, accessory,
+        create_time, creator, is_delete
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from task
+        where task_id = #{taskId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from task
+        where task_id = #{taskId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.gly.uppis.common.entity.Task">
+        insert into task (task_id, task_title, statement,
+                          user_id, high_task_id, parent_task_id,
+                          begin_time, finish_time, deadline,
+                          update_time, status, score,
+                          percentage, weight, content,
+                          accessory, create_time, creator,
+                          is_delete)
+        values (#{taskId,jdbcType=INTEGER}, #{taskTitle,jdbcType=VARCHAR}, #{statement,jdbcType=VARCHAR},
+                #{userId,jdbcType=INTEGER}, #{highTaskId,jdbcType=VARCHAR}, #{parentTaskId,jdbcType=INTEGER},
+                #{beginTime,jdbcType=TIMESTAMP}, #{finishTime,jdbcType=TIMESTAMP}, #{deadline,jdbcType=TIMESTAMP},
+                #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE},
+                #{percentage,jdbcType=DOUBLE}, #{weight,jdbcType=DOUBLE}, #{content,jdbcType=VARCHAR},
+                #{accessory,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=INTEGER},
+                #{isDelete,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.gly.uppis.common.entity.Task">
+        insert into task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskId != null">
+                task_id,
+            </if>
+            <if test="taskTitle != null">
+                task_title,
+            </if>
+            <if test="statement != null">
+                statement,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="highTaskId != null">
+                high_task_id,
+            </if>
+            <if test="parentTaskId != null">
+                parent_task_id,
+            </if>
+            <if test="beginTime != null">
+                begin_time,
+            </if>
+            <if test="finishTime != null">
+                finish_time,
+            </if>
+            <if test="deadline != null">
+                deadline,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="percentage != null">
+                percentage,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="accessory != null">
+                accessory,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskId != null">
+                #{taskId,jdbcType=INTEGER},
+            </if>
+            <if test="taskTitle != null">
+                #{taskTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="statement != null">
+                #{statement,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="highTaskId != null">
+                #{highTaskId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentTaskId != null">
+                #{parentTaskId,jdbcType=INTEGER},
+            </if>
+            <if test="beginTime != null">
+                #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishTime != null">
+                #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deadline != null">
+                #{deadline,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="percentage != null">
+                #{percentage,jdbcType=DOUBLE},
+            </if>
+            <if test="weight != null">
+                #{weight,jdbcType=DOUBLE},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="accessory != null">
+                #{accessory,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gly.uppis.common.entity.Task">
+        update task
+        <set>
+            <if test="taskTitle != null">
+                task_title = #{taskTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="statement != null">
+                statement = #{statement,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="highTaskId != null">
+                high_task_id = #{highTaskId,jdbcType=VARCHAR},
+            </if>
+            <if test="parentTaskId != null">
+                parent_task_id = #{parentTaskId,jdbcType=INTEGER},
+            </if>
+            <if test="beginTime != null">
+                begin_time = #{beginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="finishTime != null">
+                finish_time = #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="deadline != null">
+                deadline = #{deadline,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="percentage != null">
+                percentage = #{percentage,jdbcType=DOUBLE},
+            </if>
+            <if test="weight != null">
+                weight = #{weight,jdbcType=DOUBLE},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="accessory != null">
+                accessory = #{accessory,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=INTEGER},
+            </if>
+        </set>
+        where task_id = #{taskId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gly.uppis.common.entity.Task">
+        update task
+        set task_title = #{taskTitle,jdbcType=VARCHAR},
+            statement = #{statement,jdbcType=VARCHAR},
+            user_id = #{userId,jdbcType=INTEGER},
+            high_task_id = #{highTaskId,jdbcType=VARCHAR},
+            parent_task_id = #{parentTaskId,jdbcType=INTEGER},
+            begin_time = #{beginTime,jdbcType=TIMESTAMP},
+            finish_time = #{finishTime,jdbcType=TIMESTAMP},
+            deadline = #{deadline,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            status = #{status,jdbcType=INTEGER},
+            score = #{score,jdbcType=DOUBLE},
+            percentage = #{percentage,jdbcType=DOUBLE},
+            weight = #{weight,jdbcType=DOUBLE},
+            content = #{content,jdbcType=VARCHAR},
+            accessory = #{accessory,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            creator = #{creator,jdbcType=INTEGER},
+            is_delete = #{isDelete,jdbcType=INTEGER}
+        where task_id = #{taskId,jdbcType=INTEGER}
+    </update>
+</mapper>

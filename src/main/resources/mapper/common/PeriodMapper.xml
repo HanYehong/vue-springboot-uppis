@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.common.dao.PeriodMapper">
+  <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.Period">
+    <id column="period_id" jdbcType="INTEGER" property="periodId" />
+    <result column="per_year" jdbcType="INTEGER" property="perYear" />
+    <result column="per_month" jdbcType="INTEGER" property="perMonth" />
+    <result column="period_name" jdbcType="VARCHAR" property="periodName" />
+    <result column="u_weight" jdbcType="DOUBLE" property="uWeight" />
+    <result column="o_weight" jdbcType="DOUBLE" property="oWeight" />
+    <result column="m_weight" jdbcType="DOUBLE" property="mWeight" />
+    <result column="leader_u_weight" jdbcType="DOUBLE" property="leaderUWeight" />
+    <result column="leader_o_weight" jdbcType="DOUBLE" property="leaderOWeight" />
+    <result column="mark_weight" jdbcType="DOUBLE" property="markWeight" />
+    <result column="task_weight" jdbcType="DOUBLE" property="taskWeight" />
+    <result column="attendance_weight" jdbcType="DOUBLE" property="attendanceWeight" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    period_id, per_year, per_month, period_name, u_weight, o_weight, m_weight, leader_u_weight, 
+    leader_o_weight, mark_weight, task_weight, attendance_weight, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from period
+    where period_id = #{periodId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from period
+    where period_id = #{periodId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gly.uppis.common.entity.Period">
+    insert into period (period_id, per_year, per_month, 
+      period_name, u_weight, o_weight, 
+      m_weight, leader_u_weight, leader_o_weight, 
+      mark_weight, task_weight, attendance_weight, 
+      create_time)
+    values (#{periodId,jdbcType=INTEGER}, #{perYear,jdbcType=INTEGER}, #{perMonth,jdbcType=INTEGER}, 
+      #{periodName,jdbcType=VARCHAR}, #{uWeight,jdbcType=DOUBLE}, #{oWeight,jdbcType=DOUBLE}, 
+      #{mWeight,jdbcType=DOUBLE}, #{leaderUWeight,jdbcType=DOUBLE}, #{leaderOWeight,jdbcType=DOUBLE}, 
+      #{markWeight,jdbcType=DOUBLE}, #{taskWeight,jdbcType=DOUBLE}, #{attendanceWeight,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gly.uppis.common.entity.Period">
+    insert into period
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="periodId != null">
+        period_id,
+      </if>
+      <if test="perYear != null">
+        per_year,
+      </if>
+      <if test="perMonth != null">
+        per_month,
+      </if>
+      <if test="periodName != null">
+        period_name,
+      </if>
+      <if test="uWeight != null">
+        u_weight,
+      </if>
+      <if test="oWeight != null">
+        o_weight,
+      </if>
+      <if test="mWeight != null">
+        m_weight,
+      </if>
+      <if test="leaderUWeight != null">
+        leader_u_weight,
+      </if>
+      <if test="leaderOWeight != null">
+        leader_o_weight,
+      </if>
+      <if test="markWeight != null">
+        mark_weight,
+      </if>
+      <if test="taskWeight != null">
+        task_weight,
+      </if>
+      <if test="attendanceWeight != null">
+        attendance_weight,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="periodId != null">
+        #{periodId,jdbcType=INTEGER},
+      </if>
+      <if test="perYear != null">
+        #{perYear,jdbcType=INTEGER},
+      </if>
+      <if test="perMonth != null">
+        #{perMonth,jdbcType=INTEGER},
+      </if>
+      <if test="periodName != null">
+        #{periodName,jdbcType=VARCHAR},
+      </if>
+      <if test="uWeight != null">
+        #{uWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="oWeight != null">
+        #{oWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="mWeight != null">
+        #{mWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="leaderUWeight != null">
+        #{leaderUWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="leaderOWeight != null">
+        #{leaderOWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="markWeight != null">
+        #{markWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="taskWeight != null">
+        #{taskWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="attendanceWeight != null">
+        #{attendanceWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gly.uppis.common.entity.Period">
+    update period
+    <set>
+      <if test="perYear != null">
+        per_year = #{perYear,jdbcType=INTEGER},
+      </if>
+      <if test="perMonth != null">
+        per_month = #{perMonth,jdbcType=INTEGER},
+      </if>
+      <if test="periodName != null">
+        period_name = #{periodName,jdbcType=VARCHAR},
+      </if>
+      <if test="uWeight != null">
+        u_weight = #{uWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="oWeight != null">
+        o_weight = #{oWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="mWeight != null">
+        m_weight = #{mWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="leaderUWeight != null">
+        leader_u_weight = #{leaderUWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="leaderOWeight != null">
+        leader_o_weight = #{leaderOWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="markWeight != null">
+        mark_weight = #{markWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="taskWeight != null">
+        task_weight = #{taskWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="attendanceWeight != null">
+        attendance_weight = #{attendanceWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where period_id = #{periodId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gly.uppis.common.entity.Period">
+    update period
+    set per_year = #{perYear,jdbcType=INTEGER},
+      per_month = #{perMonth,jdbcType=INTEGER},
+      period_name = #{periodName,jdbcType=VARCHAR},
+      u_weight = #{uWeight,jdbcType=DOUBLE},
+      o_weight = #{oWeight,jdbcType=DOUBLE},
+      m_weight = #{mWeight,jdbcType=DOUBLE},
+      leader_u_weight = #{leaderUWeight,jdbcType=DOUBLE},
+      leader_o_weight = #{leaderOWeight,jdbcType=DOUBLE},
+      mark_weight = #{markWeight,jdbcType=DOUBLE},
+      task_weight = #{taskWeight,jdbcType=DOUBLE},
+      attendance_weight = #{attendanceWeight,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where period_id = #{periodId,jdbcType=INTEGER}
+  </update>
+</mapper>

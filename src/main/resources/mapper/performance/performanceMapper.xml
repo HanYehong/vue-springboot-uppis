@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.performance.dao.PerformanceDao">
+    <resultMap id="BaseResultMap" type="com.gly.uppis.performance.dao.result.PerformanceResult">
+        <id column="per_id" jdbcType="BIGINT" property="perId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="period_id" jdbcType="INTEGER" property="periodId" />
+        <result column="score_attendance" jdbcType="DOUBLE" property="scoreAttendance" />
+        <result column="score_task" jdbcType="DOUBLE" property="scoreTask" />
+        <result column="score_mark" jdbcType="DOUBLE" property="scoreMark" />
+        <result column="score_total" jdbcType="DOUBLE" property="scoreTotal" />
+        <result column="per_year" jdbcType="INTEGER" property="perYear" />
+        <result column="per_month" jdbcType="INTEGER" property="perMonth" />
+        <result column="period_name" jdbcType="VARCHAR" property="periodName" />
+        <result column="mark_weight" jdbcType="DOUBLE" property="markWeight" />
+        <result column="task_weight" jdbcType="DOUBLE" property="taskWeight" />
+        <result column="attendance_weight" jdbcType="DOUBLE" property="attendanceWeight" />
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="com.gly.uppis.common.entity.Performance">
+        <id column="per_id" jdbcType="BIGINT" property="perId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="period_id" jdbcType="INTEGER" property="periodId" />
+        <result column="score_attendance" jdbcType="DOUBLE" property="scoreAttendance" />
+        <result column="score_task" jdbcType="DOUBLE" property="scoreTask" />
+        <result column="score_mark" jdbcType="DOUBLE" property="scoreMark" />
+        <result column="score_total" jdbcType="DOUBLE" property="scoreTotal" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        per_id, user_id, d.period_id, score_attendance, score_task, score_mark, score_total, per_year, per_month, period_name, mark_weight, task_weight, attendance_weight
+    </sql>
+    <select id="selectLastData" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from performance e left join period d on e.period_id = d.period_id
+        where e.user_id = #{userId}
+        order by e.per_id DESC
+        limit 1
+    </select>
+    <select id="listPerResult" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from performance e left join period d on e.period_id = d.period_id
+        where e.user_id = #{userId}
+        <if test="type == 0">
+            and d.per_year = #{year} and d.per_month > 0
+        </if>
+        <if test="type == 1">
+            and d.per_year = #{year} and d.per_month &lt; 0
+        </if>
+        <if test="type == 2">
+            and d.per_month = 0 order by d.per_year DESC limit 5
+        </if>
+    </select>
+    <select id="selectByUserIdAndPeriodId" resultMap="BaseResultMap2">
+        select *
+        from performance
+        where user_id = #{userId} and period_id = #{periodId}
+    </select>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.common.dao.MarkDetailMapper">
+  <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.MarkDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="mark_user_id" jdbcType="INTEGER" property="markUserId" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="assessment" jdbcType="DOUBLE" property="assessment" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="period_id" jdbcType="INTEGER" property="periodId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, mark_user_id, type, assessment, create_time, period_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mark_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mark_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gly.uppis.common.entity.MarkDetail">
+    insert into mark_detail (id, user_id, mark_user_id, 
+      type, assessment, create_time, period_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{markUserId,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{assessment, jdbcType=DOUBLE}, #{createTime,jdbcType=TIMESTAMP}, #{periodId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gly.uppis.common.entity.MarkDetail">
+    insert into mark_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="markUserId != null">
+        mark_user_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="assessment != null">
+        assessment,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="periodId != null">
+        period_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="markUserId != null">
+        #{markUserId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="assessment != null">
+        #{assessment, jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="periodId != null">
+        #{periodId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gly.uppis.common.entity.MarkDetail">
+    update mark_detail
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="markUserId != null">
+        mark_user_id = #{markUserId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="assessment != null">
+        assessment = #{assessment,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="periodId != null">
+        period_id = #{periodId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gly.uppis.common.entity.MarkDetail">
+    update mark_detail
+    set user_id = #{userId,jdbcType=INTEGER},
+      mark_user_id = #{markUserId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      assessment = #{assessment,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      period_id = #{periodId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

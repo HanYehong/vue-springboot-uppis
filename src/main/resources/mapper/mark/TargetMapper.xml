@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.mark.dao.TargetDao">
+    <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.Target">
+        <id column="target_id" jdbcType="BIGINT" property="targetId" />
+        <result column="target_content" jdbcType="VARCHAR" property="targetContent" />
+        <result column="property" jdbcType="INTEGER" property="property" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        target_id, target_content, property
+    </sql>
+    <select id="selectByProperty" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from target
+        where property = #{property}
+    </select>
+</mapper>

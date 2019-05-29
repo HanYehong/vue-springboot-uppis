@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.task.dao.TaskDao">
+    <resultMap id="BaseResultMap" type="com.gly.uppis.task.dao.result.TaskResult">
+        <id column="task_id" jdbcType="INTEGER" property="taskId" />
+        <result column="task_title" jdbcType="VARCHAR" property="taskTitle" />
+        <result column="statement" jdbcType="VARCHAR" property="statement" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="high_task_id" jdbcType="VARCHAR" property="highTaskId" />
+        <result column="parent_task_id" jdbcType="INTEGER" property="parentTaskId" />
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+        <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="score" jdbcType="DOUBLE" property="score" />
+        <result column="percentage" jdbcType="DOUBLE" property="percentage" />
+        <result column="weight" jdbcType="DOUBLE" property="weight" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="accessory" jdbcType="VARCHAR" property="accessory" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="creator" jdbcType="INTEGER" property="creator" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+        <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+    <resultMap id="BaseResultMap3" type="com.gly.uppis.common.entity.Task">
+        <id column="task_id" jdbcType="INTEGER" property="taskId" />
+        <result column="task_title" jdbcType="VARCHAR" property="taskTitle" />
+        <result column="statement" jdbcType="VARCHAR" property="statement" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="high_task_id" jdbcType="VARCHAR" property="highTaskId" />
+        <result column="parent_task_id" jdbcType="INTEGER" property="parentTaskId" />
+        <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+        <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+        <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="score" jdbcType="DOUBLE" property="score" />
+        <result column="percentage" jdbcType="DOUBLE" property="percentage" />
+        <result column="weight" jdbcType="DOUBLE" property="weight" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="accessory" jdbcType="VARCHAR" property="accessory" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="creator" jdbcType="INTEGER" property="creator" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    </resultMap>
+    <resultMap id="BaseResultMap2" type="com.gly.uppis.common.entity.Task">
+        <id column="task_id" jdbcType="INTEGER" property="taskId" />
+        <result column="high_task_id" jdbcType="VARCHAR" property="highTaskId" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        task_id, task_title, statement, user_id, high_task_id, parent_task_id, begin_time, finish_time, deadline,
+        update_time, status, score, percentage, weight, content, accessory, create_time,
+        creator, is_delete, dept_name, name
+    </sql>
+    <sql id="Base_Column_List2">
+        task_id, high_task_id
+    </sql>
+    <select id="selectAllParentTask" resultMap="BaseResultMap3">
+        select *
+        from task
+        where task_id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        order by task_id DESC
+    </select>
+    <select id="selectChildTasks" resultMap="BaseResultMap3">
+        select *
+        from task
+        where parent_task_id = #{taskId} and is_delete = 0
+    </select>
+    <select id="selectByUserIdAndCreator" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from task
+        where user_id = #{userId} or creator = #{userId} and is_delete = 0
+    </select>
+    <select id="selectAllSubTask" resultType="com.gly.uppis.common.entity.Task">
+        select
+        task_id as taskId, high_task_id as highTaskId
+        from task
+        where is_delete = 0 and high_task_id like CONCAT('%',#{taskId,jdbcType=INTEGER},'%')
+    </select>
+    <select id="selectByParam" resultMap="BaseResultMap">
+        select
+            t.task_id, t.task_title, t.statement, t.user_id, t.high_task_id, t.begin_time, t.finish_time,
+            t.deadline, t.update_time, t.status, t.score, t.percentage, t.weight, t.content, t.accessory, t.create_time, t.creator, t.is_delete, d.dept_name, u.name
+        from task t join `user` u join dept d on t.user_id = u.user_id and u.dept_id = d.dept_id and t.is_delete = 0
+        where 1=1
+        <if test="status != null">
+            and t.status = #{status}
+        </if>
+        <if test="taskId != null">
+            and t.task_id = #{taskId}
+        </if>
+        <if test="userId != null">
+            and t.user_id = #{userId} or t.creator = #{userId}
+        </if>
+        order by t.task_id ASC
+    </select>
+</mapper>

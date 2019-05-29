@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.mark.dao.MarkDetailDao">
+    <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.MarkDetail">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="mark_user_id" jdbcType="INTEGER" property="markUserId" />
+        <result column="type" jdbcType="INTEGER" property="type" />
+        <result column="assessment" jdbcType="DOUBLE" property="assessment" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="period_id" jdbcType="INTEGER" property="periodId" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_id, mark_user_id, type, assessment, create_time, period_id
+    </sql>
+    <select id="selectByUserIdAndPeriodId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from mark_detail
+        where user_id = #{userId} and period_id = #{periodId}
+    </select>
+    <select id="selectByMarkUserIdAndPeriodId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from mark_detail
+        where mark_user_id = #{markUserId} and period_id = #{periodId}
+    </select>
+</mapper>

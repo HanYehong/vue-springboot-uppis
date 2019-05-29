@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.common.dao.PerformanceMapper">
+  <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.Performance">
+    <id column="per_id" jdbcType="BIGINT" property="perId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="period_id" jdbcType="INTEGER" property="periodId" />
+    <result column="score_attendance" jdbcType="DOUBLE" property="scoreAttendance" />
+    <result column="score_task" jdbcType="DOUBLE" property="scoreTask" />
+    <result column="score_mark" jdbcType="DOUBLE" property="scoreMark" />
+    <result column="score_total" jdbcType="DOUBLE" property="scoreTotal" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    per_id, user_id, period_id, score_attendance, score_task, score_mark, score_total
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from performance
+    where per_id = #{perId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from performance
+    where per_id = #{perId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gly.uppis.common.entity.Performance">
+    insert into performance (per_id, user_id, period_id, 
+      score_attendance, score_task, score_mark, 
+      score_total)
+    values (#{perId,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{periodId,jdbcType=INTEGER}, 
+      #{scoreAttendance,jdbcType=DOUBLE}, #{scoreTask,jdbcType=DOUBLE}, #{scoreMark,jdbcType=DOUBLE}, 
+      #{scoreTotal,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gly.uppis.common.entity.Performance">
+    insert into performance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="perId != null">
+        per_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="periodId != null">
+        period_id,
+      </if>
+      <if test="scoreAttendance != null">
+        score_attendance,
+      </if>
+      <if test="scoreTask != null">
+        score_task,
+      </if>
+      <if test="scoreMark != null">
+        score_mark,
+      </if>
+      <if test="scoreTotal != null">
+        score_total,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="perId != null">
+        #{perId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="periodId != null">
+        #{periodId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreAttendance != null">
+        #{scoreAttendance,jdbcType=DOUBLE},
+      </if>
+      <if test="scoreTask != null">
+        #{scoreTask,jdbcType=DOUBLE},
+      </if>
+      <if test="scoreMark != null">
+        #{scoreMark,jdbcType=DOUBLE},
+      </if>
+      <if test="scoreTotal != null">
+        #{scoreTotal,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gly.uppis.common.entity.Performance">
+    update performance
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="periodId != null">
+        period_id = #{periodId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreAttendance != null">
+        score_attendance = #{scoreAttendance,jdbcType=DOUBLE},
+      </if>
+      <if test="scoreTask != null">
+        score_task = #{scoreTask,jdbcType=DOUBLE},
+      </if>
+      <if test="scoreMark != null">
+        score_mark = #{scoreMark,jdbcType=DOUBLE},
+      </if>
+      <if test="scoreTotal != null">
+        score_total = #{scoreTotal,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where per_id = #{perId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gly.uppis.common.entity.Performance">
+    update performance
+    set user_id = #{userId,jdbcType=INTEGER},
+      period_id = #{periodId,jdbcType=INTEGER},
+      score_attendance = #{scoreAttendance,jdbcType=DOUBLE},
+      score_task = #{scoreTask,jdbcType=DOUBLE},
+      score_mark = #{scoreMark,jdbcType=DOUBLE},
+      score_total = #{scoreTotal,jdbcType=DOUBLE}
+    where per_id = #{perId,jdbcType=BIGINT}
+  </update>
+</mapper>

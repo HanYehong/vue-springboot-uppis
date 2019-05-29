@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.common.dao.AttendanceMapper">
+  <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.Attendance">
+    <id column="att_id" jdbcType="BIGINT" property="attId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="arrive_time" jdbcType="TIMESTAMP" property="arriveTime" />
+    <result column="leave_time" jdbcType="TIMESTAMP" property="leaveTime" />
+    <result column="late" jdbcType="INTEGER" property="late" />
+    <result column="early" jdbcType="INTEGER" property="early" />
+    <result column="absenteeism" jdbcType="INTEGER" property="absenteeism" />
+    <result column="vocation" jdbcType="INTEGER" property="vocation" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    att_id, user_id, date, arrive_time, leave_time, late, early, absenteeism, vocation, 
+    content, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from attendance
+    where att_id = #{attId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from attendance
+    where att_id = #{attId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gly.uppis.common.entity.Attendance">
+    insert into attendance (att_id, user_id, date, 
+      arrive_time, leave_time, late, 
+      early, absenteeism, vocation, 
+      content, is_delete)
+    values (#{attId,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{date,jdbcType=DATE}, 
+      #{arriveTime,jdbcType=TIMESTAMP}, #{leaveTime,jdbcType=TIMESTAMP}, #{late,jdbcType=INTEGER}, 
+      #{early,jdbcType=INTEGER}, #{absenteeism,jdbcType=INTEGER}, #{vocation,jdbcType=INTEGER}, 
+      #{content,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gly.uppis.common.entity.Attendance">
+    insert into attendance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attId != null">
+        att_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="arriveTime != null">
+        arrive_time,
+      </if>
+      <if test="leaveTime != null">
+        leave_time,
+      </if>
+      <if test="late != null">
+        late,
+      </if>
+      <if test="early != null">
+        early,
+      </if>
+      <if test="absenteeism != null">
+        absenteeism,
+      </if>
+      <if test="vocation != null">
+        vocation,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attId != null">
+        #{attId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="arriveTime != null">
+        #{arriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTime != null">
+        #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="late != null">
+        #{late,jdbcType=INTEGER},
+      </if>
+      <if test="early != null">
+        #{early,jdbcType=INTEGER},
+      </if>
+      <if test="absenteeism != null">
+        #{absenteeism,jdbcType=INTEGER},
+      </if>
+      <if test="vocation != null">
+        #{vocation,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gly.uppis.common.entity.Attendance">
+    update attendance
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="arriveTime != null">
+        arrive_time = #{arriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTime != null">
+        leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="late != null">
+        late = #{late,jdbcType=INTEGER},
+      </if>
+      <if test="early != null">
+        early = #{early,jdbcType=INTEGER},
+      </if>
+      <if test="absenteeism != null">
+        absenteeism = #{absenteeism,jdbcType=INTEGER},
+      </if>
+      <if test="vocation != null">
+        vocation = #{vocation,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where att_id = #{attId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gly.uppis.common.entity.Attendance">
+    update attendance
+    set user_id = #{userId,jdbcType=INTEGER},
+      date = #{date,jdbcType=DATE},
+      arrive_time = #{arriveTime,jdbcType=TIMESTAMP},
+      leave_time = #{leaveTime,jdbcType=TIMESTAMP},
+      late = #{late,jdbcType=INTEGER},
+      early = #{early,jdbcType=INTEGER},
+      absenteeism = #{absenteeism,jdbcType=INTEGER},
+      vocation = #{vocation,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=INTEGER}
+    where att_id = #{attId,jdbcType=BIGINT}
+  </update>
+</mapper>

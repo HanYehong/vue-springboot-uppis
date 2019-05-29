@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.team.dao.TeamMapper">
+    <resultMap id="BaseResultMap" type="com.gly.uppis.team.dao.result.TeamResult">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="gender" jdbcType="INTEGER" property="gender" />
+        <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+        <result column="identity" jdbcType="VARCHAR" property="identity" />
+        <result column="politics" jdbcType="TINYINT" property="politics" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+        <result column="native_place" jdbcType="VARCHAR" property="nativePlace" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+        <result column="entry_time" jdbcType="TIMESTAMP" property="entryTime" />
+        <result column="leave_time" jdbcType="TIMESTAMP" property="leaveTime" />
+        <result column="level" jdbcType="INTEGER" property="level" />
+        <result column="position" jdbcType="VARCHAR" property="position" />
+        <result column="incumbency" jdbcType="INTEGER" property="incumbency" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="creator" jdbcType="INTEGER" property="creator" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="updator" jdbcType="VARCHAR" property="updator" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+        <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_id, name, password, gender, birthday, identity, politics, email, telephone,
+        native_place, address, dept_id, entry_time, leave_time, level, position, incumbency,
+        create_time, creator, update_time, updator, is_delete, dept_name
+    </sql>
+    <select id="selectByDeptAndName" resultMap="BaseResultMap">
+        select
+            u.id, u.user_id, u.`name`,
+            u.`password`, u.gender, u.birthday,
+            u.identity, u.politics, u.email,
+            u.telephone, u.native_place, u.address,
+            u.dept_id, u.entry_time, u.leave_time,
+            u.`level`, u.position, u.incumbency,
+            u.create_time, u.creator, u.update_time,
+            u.updator, u.is_delete, d.dept_name
+        from `user` u left join dept d on u.dept_id = d.dept_id and u.is_delete = 0 and d.is_delete = 0
+        where 1=1
+              <if test="deptId != null and deptId.size > 0">
+                  and u.dept_id in
+                  <foreach item="item" index="index" collection="deptId" open="(" separator="," close=")">
+                      #{item}
+                  </foreach>
+              </if>
+              <if test="name != null and name != ''">
+                  and u.name = #{name}
+              </if>
+    </select>
+</mapper>

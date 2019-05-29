@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.attendance.dao.AttendanceDao">
+    <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.Attendance">
+        <id column="att_id" jdbcType="BIGINT" property="attId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="date" jdbcType="DATE" property="date" />
+        <result column="arrive_time" jdbcType="TIMESTAMP" property="arriveTime" />
+        <result column="leave_time" jdbcType="TIMESTAMP" property="leaveTime" />
+        <result column="late" jdbcType="INTEGER" property="late" />
+        <result column="early" jdbcType="INTEGER" property="early" />
+        <result column="absenteeism" jdbcType="INTEGER" property="absenteeism" />
+        <result column="vocation" jdbcType="INTEGER" property="vocation" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        att_id, user_id, date, arrive_time, leave_time, late, early, absenteeism, vocation,
+        content, is_delete
+    </sql>
+    <select id="selectByDateAndType" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from attendance
+        where 1=1
+        <if test="type == 0">
+            and late = 0 and early = 0 and absenteeism = 0 and vocation = 0
+        </if>
+        <if test="type == 1">
+            and vocation = 1
+        </if>
+        <if test="type == 2">
+            and late = 1
+        </if>
+        <if test="type == 3">
+            and early = 1
+        </if>
+        <if test="type == 4">
+            and absenteeism = 1
+        </if>
+        <if test="beginDate != null and endDate !=null">
+            and `date` between beginDate and endDate
+        </if>
+        order by `date` DESC
+    </select>
+</mapper>

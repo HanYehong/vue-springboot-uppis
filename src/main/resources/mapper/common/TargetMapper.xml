@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gly.uppis.common.dao.TargetMapper">
+  <resultMap id="BaseResultMap" type="com.gly.uppis.common.entity.Target">
+    <id column="target_id" jdbcType="BIGINT" property="targetId" />
+    <result column="target_content" jdbcType="VARCHAR" property="targetContent" />
+    <result column="property" jdbcType="INTEGER" property="property" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    target_id, target_content, property
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select *
+    from target
+  </select>
+  <update id="clearTable">
+    truncate table target
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from target
+    where target_id = #{targetId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from target
+    where target_id = #{targetId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.gly.uppis.common.entity.Target">
+    insert into target (target_id, target_content, property
+      )
+    values (#{targetId,jdbcType=BIGINT}, #{targetContent,jdbcType=VARCHAR}, #{property,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gly.uppis.common.entity.Target">
+    insert into target
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="targetId != null">
+        target_id,
+      </if>
+      <if test="targetContent != null">
+        target_content,
+      </if>
+      <if test="property != null">
+        property,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="targetId != null">
+        #{targetId,jdbcType=BIGINT},
+      </if>
+      <if test="targetContent != null">
+        #{targetContent,jdbcType=VARCHAR},
+      </if>
+      <if test="property != null">
+        #{property,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertTarget">
+    insert into target(target_content, property) values(#{targetContent}, #{property})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gly.uppis.common.entity.Target">
+    update target
+    <set>
+      <if test="targetContent != null">
+        target_content = #{targetContent,jdbcType=VARCHAR},
+      </if>
+      <if test="property != null">
+        property = #{property,jdbcType=INTEGER},
+      </if>
+    </set>
+    where target_id = #{targetId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gly.uppis.common.entity.Target">
+    update target
+    set target_content = #{targetContent,jdbcType=VARCHAR},
+      property = #{property,jdbcType=INTEGER}
+    where target_id = #{targetId,jdbcType=BIGINT}
+  </update>
+</mapper>
