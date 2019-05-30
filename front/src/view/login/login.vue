@@ -30,15 +30,14 @@ export default {
     handleSubmit ({ userName, password }) {
       this.handleLogin({ userName, password }).then(res => {
         this.getUserInfo().then(res => {
-          this.$router.push({
-            name: this.$config.homeName
+          this.$ajax.post('/user/saveUser', { username: userName }).then(data => {
+            console.log('登录成功', data)
+            this.$router.push({
+              name: this.$config.homeName
+            })
           })
         })
       })
-      /* this.$ajax.post('/user/check', {username: userName, password: password}).then(data => {
-        console.log('登录成功', data)
-        this.$router.push('home')
-      }) */
     }
   }
 }

@@ -5,6 +5,7 @@ import com.gly.uppis.common.dao.MarkDetailMapper;
 import com.gly.uppis.common.dao.MarkMapper;
 import com.gly.uppis.common.entity.*;
 import com.gly.uppis.common.exception.ValidException;
+import com.gly.uppis.common.util.UserUtil;
 import com.gly.uppis.mark.controller.request.MarkReuqest;
 import com.gly.uppis.mark.dao.*;
 import com.gly.uppis.mark.dao.result.UserWithLeaderResult;
@@ -45,8 +46,6 @@ public class MarkServiceImpl implements MarkService{
     @Autowired
     private MarkDao markDao;
 
-    private static Integer USER_ID = 10012001;
-
     private static Integer PERIOD_ID = 1;
 
     @Override
@@ -73,7 +72,7 @@ public class MarkServiceImpl implements MarkService{
     @Override
     public void commitMark(MarkReuqest param) {
         MarkDetail detail = new MarkDetail();
-        detail.setUserId(USER_ID);
+        detail.setUserId(UserUtil.getCurrentUserId());
         detail.setMarkUserId(param.getMarkUserId());
         detail.setPeriodId(param.getPeriodId());
         detail.setType(param.getType());
@@ -85,7 +84,7 @@ public class MarkServiceImpl implements MarkService{
                 Mark mark = new Mark();
                 mark.setPeriodId(PERIOD_ID);
                 mark.setSelfAssessment(param.getAssessment());
-                mark.setUserId(USER_ID);
+                mark.setUserId(UserUtil.getCurrentUserId());
                 markMapper.insertSelective(mark);
                 break;
             case 1:
@@ -179,7 +178,7 @@ public class MarkServiceImpl implements MarkService{
         List<Integer> masterIds = peerDepts.stream().map(Dept::getMasterId).collect(Collectors.toList());
         List<User> allMaster = userDao.selectByUserIds(masterIds);
         allMaster = allMaster.stream().
-                filter(x -> !x.getUserId().equals(USER_ID)).collect(Collectors.toList());
+                filter(x -> !x.getUserId().equals(UserUtil.getCurrentUserId())).collect(Collectors.toList());
         return allMaster;
     }
 
@@ -197,7 +196,7 @@ public class MarkServiceImpl implements MarkService{
     }
 
     private UserWithLeaderResult getCurrentUser() {
-        UserWithLeaderResult user = userDao.selectByUserId(USER_ID);
+        UserWithLeaderResult user = userDao.selectByUserId(UserUtil.getCurrentUserId());
         if (user == null) {
             throw new ValidException("获取不到当前登录用户");
         }
@@ -206,7 +205,7 @@ public class MarkServiceImpl implements MarkService{
 
     private List<User> filterUser(List<User> users) {
         // 得到所有被自己评分过的人
-        List<MarkDetail> users1 = markDetailDao.selectByUserIdAndPeriodId(USER_ID, PERIOD_ID);
+        List<MarkDetail> users1 = markDetailDao.selectByUserIdAndPeriodId(UserUtil.getCurrentUserId(), PERIOD_ID);
         // 转化为ID List
         List<Integer> ids = users1.stream().map(MarkDetail::getMarkUserId).collect(Collectors.toList());
         // 筛选出users中所有没有被自己评分过的人

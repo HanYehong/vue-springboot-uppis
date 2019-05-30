@@ -4,6 +4,7 @@ import com.gly.uppis.common.dao.TaskMapper;
 import com.gly.uppis.common.entity.Task;
 import com.gly.uppis.common.entity.User;
 import com.gly.uppis.common.exception.ValidException;
+import com.gly.uppis.common.util.UserUtil;
 import com.gly.uppis.mark.dao.UserDao;
 import com.gly.uppis.task.controller.request.TaskSearchParamRequest;
 import com.gly.uppis.task.dao.TaskDao;
@@ -33,12 +34,10 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     private UserDao userDao;
 
-    private static Integer USER_ID = 10012001;
-
     @Override
     public List<TaskResult> listMyTask() {
         TaskSearchParamRequest param = new TaskSearchParamRequest();
-        param.setUserId(USER_ID);
+        param.setUserId(UserUtil.getCurrentUserId());
         return taskDao.selectByParam(param);
     }
 
@@ -71,7 +70,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void publishTask(Task task) {
         task.setStatus(0);
-        task.setCreator(USER_ID);
+        task.setCreator(UserUtil.getCurrentUserId());
         taskMapper.insertSelective(task);
     }
 
@@ -91,7 +90,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<User> listSameDeptUsers() {
-        User user = userDao.selectByUserId(USER_ID);
+        User user = userDao.selectByUserId(UserUtil.getCurrentUserId());
         if (user == null) {
             throw new ValidException("用户不存在");
         }

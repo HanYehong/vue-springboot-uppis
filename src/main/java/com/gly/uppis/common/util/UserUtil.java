@@ -9,11 +9,11 @@ import com.gly.uppis.common.exception.ValidException;
  */
 public class UserUtil {
 
-    public static String getCurrentUserId() {
+    public static Integer getCurrentUserId() {
         String userId = RedisHelper.getRedisUtil().get("userId");
         if (userId == null) {
             throw new ValidException("获取不到当前用户，请重新登录");
         }
-        return userId;
+        return Integer.parseInt(userId);
     }
 }

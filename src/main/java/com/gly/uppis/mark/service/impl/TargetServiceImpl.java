@@ -22,8 +22,6 @@ public class TargetServiceImpl implements TargetService {
     @Autowired
     private UserDao userDao;
 
-    private static Integer USER_ID = 10012001;
-
     @Override
     public List<Target> selectTargetByProperty(Integer userId) {
         User currentMarkUser = userDao.selectByUserId(userId);

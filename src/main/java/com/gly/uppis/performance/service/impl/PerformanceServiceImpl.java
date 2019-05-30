@@ -3,6 +3,7 @@ package com.gly.uppis.performance.service.impl;
 import com.gly.uppis.common.entity.Performance;
 import com.gly.uppis.common.entity.Period;
 import com.gly.uppis.common.entity.User;
+import com.gly.uppis.common.util.UserUtil;
 import com.gly.uppis.mark.dao.PeriodDao;
 import com.gly.uppis.mark.dao.UserDao;
 import com.gly.uppis.performance.dao.PerformanceDao;
@@ -35,12 +36,10 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Autowired
     private UserDao userDao;
 
-    private static Integer USER_ID = 10001;
-
     @Override
     public PerformanceResult getLastRecord(Integer userId) {
         if (userId == null) {
-            userId = USER_ID;
+            userId = UserUtil.getCurrentUserId();
         }
         return performanceDao.selectLastData(userId);
     }
@@ -48,7 +47,7 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Override
     public PerResultBO listPerResult(Integer type, Integer year, Integer userId) {
         if (userId == null) {
-            userId = USER_ID;
+            userId = UserUtil.getCurrentUserId();
         }
         List<PerformanceResult> result = performanceDao.listPerResult(type, year, userId);
         PerResultBO perResultBO = new PerResultBO();
@@ -84,7 +83,7 @@ public class PerformanceServiceImpl implements PerformanceService {
     public DeptPerResultBO getDeptRecord() {
         DeptPerResultBO result = new DeptPerResultBO();
         Period period = periodDao.selectLastOne();
-        User user = userDao.selectByUserId(USER_ID);
+        User user = userDao.selectByUserId(UserUtil.getCurrentUserId());
         List<User> deptUsers = userDao.selectByDeptId(user.getDeptId());
         int levelA = 0, levelB = 0, levelC = 0, levelD = 0;
         double totalPer = 0;
